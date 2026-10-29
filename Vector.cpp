@@ -237,27 +237,11 @@ T& Vector<T>::at(std::size_t i) {
 
 // Returns a reference to the first element.
 // Throws std::out_of_range if the vector is empty.
-template <typename T>
-T& Vector<T>::front() {
     // TODO
-    if (empty()) {
-        throw std::out_of_range("Vector::front");
-    }
-
-    return *begin_;
-}
 
 // Returns a reference to the last element.
 // Throws std::out_of_range if the vector is empty.
-template <typename T>
-T& Vector<T>::back() {
     // TODO
-    if (empty()) {
-        throw std::out_of_range("Vector::back");
-    }
-
-    return *(end_ - 1);
-}
 
 // Returns a pointer to the first element of the buffer, or nullptr if there
 // is no buffer.
@@ -265,6 +249,14 @@ template <typename T>
 T* Vector<T>::data() {
     // TODO
     return begin_;
+}
+
+template <typename T>
+const T& Vector<T>::at(std::size_t i) const {
+    if (i >= size()) {
+        throw std::out_of_range("Vector::at");
+    }
+    return begin_[i];
 }
 
 // ---- Iterators ----
@@ -325,11 +317,7 @@ std::size_t Vector<T>::capacity() const {
 }
 
 // Returns true if the vector has no elements (size() == 0).
-template <typename T>
-bool Vector<T>::empty() const {
     // TODO
-    return begin_ == end_;
-}
 
 // Makes room for n elements up front, so that the vector can later grow to
 // n elements without reallocating. Afterwards, capacity() is at least n (and
@@ -384,15 +372,7 @@ void Vector<T>::push_back(const T& value) {
 
 // Removes the last element. Capacity is unchanged and nothing is freed.
 // Throws std::out_of_range if the vector is empty.
-template <typename T>
-void Vector<T>::pop_back() {
     // TODO
-    if (empty()) {
-        throw std::out_of_range("Vector::pop_back");
-    }
-
-    --end_;
-}
 
 // Removes all elements: size becomes 0. Capacity is unchanged and nothing is
 // freed.
@@ -485,27 +465,9 @@ void Vector<T>::erase(std::size_t index) {
 
 // Returns true if a and b have the same size and every pair of elements
 // compares equal with ==. Capacity does not matter.
-template <typename T>
-bool operator==(const Vector<T>& a, const Vector<T>& b) {
     // TODO
-    if (a.size() != b.size()) {
-        return false;
-    }
-
-    for (std::size_t i = 0; i < a.size(); ++i) {
-        if (!(a[i] == b[i])) {
-            return false;
-        }
-    }
-
-    return true;
-}
 
 // Returns true if a and b are not equal (hint: use operator==).
-template <typename T>
-bool operator!=(const Vector<T>& a, const Vector<T>& b) {
     // TODO
-    return !(a == b);
-}
 
 #endif
